@@ -1,0 +1,87 @@
+<mat-dialog-content>
+
+  <div class="flex items-center justify-center mb-7">
+    <fa-icon [icon]="faUserMd" size="7x" class="mr-3 text-slate-600"></fa-icon>
+    <p class="font-serif text-2xl text-center text-slate-600 font-extrabold"></p>
+  </div>
+
+  <form [formGroup]="formulariLogin" novalidate class="space-y-4" (submit)="login()">
+    <div>
+      <div class="relative">
+        <input
+          #nameInput
+          type="text"
+          formControlName="email"
+          placeholder="Email"
+          class="w-full text-sm px-4 py-3 bg-white focus:bg-gray-50 border-2 border-blue-500 rounded-lg focus:outline-none focus:border-blue-700"
+        />
+        <button type="button" class="p-2 absolute right-2" (click)="nameInput.focus()">
+          <fa-icon [icon]="faPen" class="text-blue-800"></fa-icon>
+        </button>
+      </div>
+      <div *ngIf="formulariLogin.get('email')?.touched && formulariLogin.get('email')?.invalid">
+        <p
+          *ngIf="formulariLogin.get('email')?.hasError('required')"
+          class="font-medium text-red-500 text-xs mt-1 ml-1"
+        >
+          Este campo es obligatorio
+        </p>
+        <p
+          *ngIf="formulariLogin.get('email')?.hasError('email')"
+          class="font-medium text-red-500 text-xs mt-1 ml-1"
+        >
+          Debe ser un correo electrónico válido
+        </p>
+      </div>
+    </div>
+    <div>
+      <div class="relative">
+        <input
+          formControlName="password"
+          placeholder="Contraseña"
+          [type]="showPassword ? 'text' : 'password'"
+          class="w-full text-sm px-4 py-3 bg-white focus:bg-gray-50 border-2 border-blue-500 rounded-lg focus:outline-none focus:border-blue-700"
+        />
+        <button type="button" class="p-2 absolute right-2" (click)="showPassword = !showPassword">
+          <fa-icon [icon]="showPassword ? faEye : faEyeSlash" class="text-blue-800"></fa-icon>
+        </button>
+      </div>
+      <div *ngIf="formulariLogin.get('password')?.touched && formulariLogin.get('password')?.invalid">
+        <p
+          *ngIf="formulariLogin.get('password')?.hasError('required')"
+          class="font-medium text-red-500 text-xs mt-1 ml-1"
+        >
+          Este campo es obligatorio
+        </p>
+        <p
+          *ngIf="formulariLogin.get('password')?.hasError('minlength')"
+          class="font-medium text-red-500 text-xs mt-1 ml-1"
+        >
+          Este campo debe tener más de 6 caracteres.
+        </p>
+      </div>
+    </div>
+    <div>
+      <button class="w-full mt-6" mat-flat-button disabled color="primary" type="submit" [disabled]="formulariLogin.invalid">
+        <mat-icon matSuffix>login</mat-icon>
+        Iniciar Sesión
+      </button>
+    </div>
+  </form>
+
+    <div class="flex items-center justify-center space-x-2 my-5">
+      <span class="h-px w-16 bg-gray-800"></span>
+      <span class="text-gray-800 font-normal">or</span>
+      <span class="h-px w-16 bg-gray-800"></span>
+    </div>
+    <div class="mt-7 text-center text-gray-400 text-xs">
+      <span>Copyright © 2021-2024</span>
+    </div>
+    <mat-card-footer>
+      <mat-progress-bar mode="indeterminate" *ngIf="mostrarLoading"></mat-progress-bar>
+    </mat-card-footer>
+
+</mat-dialog-content>
+
+
+
