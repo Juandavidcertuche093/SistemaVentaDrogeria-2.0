@@ -1,0 +1,96 @@
+<mat-toolbar class="mat-elevation-z3" color="warn">
+  <mat-toolbar-row>
+      <h1>EBEN-EZER</h1>
+
+      <button mat-icon-button (click)="collapse.set(!collapse())">
+          <mat-icon>menu</mat-icon>
+      </button>
+
+      <span style="flex: 1 1 auto;"></span>
+
+      <!-- Botón para notificaciones con menú desplegable -->
+      <button mat-icon-button [matMenuTriggerFor]="notificationMenu">
+          <mat-icon
+              matBadge="{{ medicamentosStockBajo.length > 0 ? medicamentosStockBajo.length : '' }}"
+              matBadgeColor="warn"
+              aria-hidden="false">
+              notifications
+          </mat-icon>
+      </button>
+
+      <!-- Menú desplegable para mostrar notificaciones -->
+      <mat-menu #notificationMenu="matMenu" [overlapTrigger]="false" class="custom-notification-menu">
+          <ng-container>
+
+              <!-- Título "Notificaciones" -->
+              <div class="p-2 text-">
+                  Notificaciones
+              </div>
+
+              <!-- Línea separadora -->
+              <mat-divider></mat-divider>
+
+              <!-- Muestra los medicamentos con stock bajo -->
+              <ng-container *ngFor="let medicamento of medicamentosStockBajo">
+                  <button mat-menu-item>
+                      <div class="my-2 w-60 text-base">
+                          <mat-icon>vaccines</mat-icon>
+                          <span class="font-bold text-lg">{{ medicamento.nombre }}</span>
+                          <span class="font-normal text-lg"> tiene pocas unidades en stock</span>
+                      </div>
+                  </button>
+              </ng-container>
+
+              <!-- Si no hay notificaciones -->
+              <ng-container *ngIf="medicamentosStockBajo.length === 0">
+                  <button mat-menu-item disabled>
+                    <span>No hay notificaciones</span>
+                  </button>
+              </ng-container>
+
+
+          </ng-container>
+      </mat-menu>
+
+      <label style="font-size: 14px; margin-right: 20px;">
+          {{ user()?.correo }} | {{ user()?.rolDescripcion }}
+      </label>
+
+      <button mat-icon-button (click)="logout()">
+          <mat-icon>logout</mat-icon>
+      </button>
+
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container>
+
+  <mat-sidenav [@sidebarAnimation]="collapse() ? 'collapsed' : 'expanded'" mode="side" opened >
+      <mat-nav-list class="sidenav-header">
+          <a
+              mat-list-item
+              class="menu-item mb-3"
+              *ngFor="let menu of listaMenus"
+              [routerLink]="menu.url"
+              routerLinkActive="selected-menu-item"
+              #rla="routerLinkActive"
+              [activated]="rla.isActive"
+          >
+              <mat-icon [fontSet]="rla.isActive ? 'material-icons': 'material-icons-outlined'"
+               matListItemIcon
+               [ngStyle]="{ 'color': 'white', 'opacity': rla.isActive ? '1' : '1.0' }">
+               {{ menu.icono }}
+              </mat-icon>
+
+              <span matListItemTitle *ngIf="!sideNavCollapse()" style="color: white;">{{ menu.nombre}}</span>
+          </a>
+      </mat-nav-list>
+
+  </mat-sidenav>
+  <mat-sidenav-content class="content"[style.margin-left]="sidenavWidth()">
+       <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+

@@ -1,0 +1,89 @@
+/* Elimina o comenta esta regla */
+/* :host * {
+   transition: all 500ms ease-in-out;
+} */
+
+:host * {
+  transition: all 500ms ease-in-out;
+}
+
+.mat-icon {
+  color: white;
+}
+
+.sidenav-header img {
+  border-radius: 100%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.mat-sidenav {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity, 1));
+  // transition: width 2500ms cubic-bezier(0.4, 0, 0.2, 1); /* Más lento (1.5 segundos) */
+}
+
+// mat-sidenav-content {
+//   transition: margin-left 2500ms cubic-bezier(0.4, 0, 0.2, 1); /* Más lento (1.5 segundos) */
+// }
+
+/* Resto de tu CSS */
+.header-text {
+  height: 3rem;
+}
+
+.header-text h2 {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.header-text p {
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.hide-header-text {
+  opacity: 0;
+  height: 0px !important;
+}
+
+.menu-item {
+  border-left: 5px solid;
+  border-left-color: rgba(0, 0, 0, 0);
+}
+
+.selected-menu-item {
+  border-left-color: #05025c; /* Azul más oscuro */
+  background-color: #1e3a8a1a; /* Un tono de azul translúcido */
+}
+
+.selected-menu-item mat-icon {
+  color: #1e3a8a !important; /* Azul oscuro */
+}
+
+.selected-menu-item span {
+  color: #1e3a8a !important; /* Azul oscuro */
+}
+
+mat-toolbar {
+  --tw-bg-opacity: 1;
+  background-color: rgb(30 58 138 / var(--tw-bg-opacity, 1)) !important; /* Rojo oscuro */
+  color: white !important; /* Para el texto */
+  position: relative;
+  z-index: 5;
+}
+
+.content {
+  padding: 24px;
+  background-color: #e0e8fa; /* Color del contenedor */
+}
+
+mat-sidenav-container {
+  height: calc(100vh - 64px);
+}
+
+.custom-notification-menu {
+  min-width: 300px; /* Ajusta el ancho mínimo */
+  max-width: 400px; /* Ajusta el ancho máximo */
+}
