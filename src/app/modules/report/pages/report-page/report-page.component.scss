@@ -1,0 +1,26 @@
+.campo-form{
+  display: flex;
+  align-items: flex-start;
+}
+
+.boton-buscar{
+  width: 150px;
+  margin-top: 15px;
+}
+
+mat-form-field{
+  margin-right: 10px;
+}
+
+table{
+  width: 100%;
+}
+
+// .boton-exportar-excel {
+//   background-color: #179945 !important; /* Verde */
+//   color: white;
+// }
+.boton-exportar-excel[disabled] {
+  background-color: #e0e0e0 !important; /* Color gris cuando está deshabilitado */
+  color: #898888;
+}
