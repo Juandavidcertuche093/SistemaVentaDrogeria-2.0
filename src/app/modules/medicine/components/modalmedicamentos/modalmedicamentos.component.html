@@ -1,0 +1,115 @@
+<h2 mat-dialog-title class="text-center w-full">{{ tituloAccion }} Medicamento</h2>
+
+<mat-dialog-content>
+    <form [formGroup]="formularioMedicamento">
+        <mat-grid-list cols="1" rowHeight="80px">
+
+            <!-- Primera fila: Nombre -->
+            <mat-grid-tile>
+                <mat-form-field appearance="fill">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput autocomplete="off" formControlName="nombre">
+                    <mat-icon matSuffix>fit_screen</mat-icon>
+                    <mat-error *ngIf="formularioMedicamento.get('nombre')?.hasError('required')">
+                        El nombre es requerido.
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <!-- Segunda fila: Categoría -->
+            <mat-grid-tile>
+                <mat-form-field appearance="fill">
+                    <mat-label>Categoría</mat-label>
+                    <mat-select formControlName="idCategoria">
+                        <mat-option *ngFor="let item of listaCategoria" [value]="item.idCategoria">
+                            {{item.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formularioMedicamento.get('idCategoria')?.hasError('required')">
+                        La categoría es requerida.
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <!-- Tercera fila: Stock -->
+            <mat-grid-tile>
+                <mat-form-field appearance="fill">
+                    <mat-label>Stock</mat-label>
+                    <input matInput autocomplete="off" formControlName="stock">
+                    <mat-icon matSuffix>edit_square</mat-icon>
+                    <mat-error *ngIf="formularioMedicamento.get('stock')?.hasError('required')">
+                        El stock es requerido.
+                    </mat-error>
+                    <mat-error *ngIf="formularioMedicamento.get('stock')?.hasError('positivo')">
+                        El stock debe ser un número positivo.
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <!-- Cuarta fila: Precio -->
+            <mat-grid-tile>
+                <mat-form-field appearance="fill">
+                    <mat-label>Precio</mat-label>
+                    <input matInput autocomplete="off" formControlName="precio">
+                    <mat-icon matSuffix>attach_money</mat-icon>
+                    <mat-error *ngIf="formularioMedicamento.get('precio')?.hasError('required')">
+                        El precio es requerido.
+                    </mat-error>
+                    <mat-error *ngIf="formularioMedicamento.get('precio')?.hasError('positivo')">
+                        El precio debe ser un número positivo.
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <!-- Quinta fila: Estado -->
+            <mat-grid-tile>
+                <mat-form-field appearance="fill">
+                    <mat-label>Estado</mat-label>
+                    <mat-select formControlName="esActivo">
+                        <mat-option value="1">Activo</mat-option>
+                        <mat-option value="0">No activo</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formularioMedicamento.get('esActivo')?.hasError('required')">
+                        El estado es requerido.
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <!-- Sexta fila: Fecha de vencimiento -->
+            <mat-grid-tile>
+                <mat-form-field appearance="fill">
+                    <mat-label>Fecha Vencimiento</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="fechaVencimiento" autocomplete="off">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="formularioMedicamento.get('fechaVencimiento')?.hasError('required')">
+                        La fecha de vencimiento es requerida.
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <!-- Séptima fila: Especificaciones -->
+            <mat-grid-tile>
+                <mat-form-field appearance="fill">
+                    <mat-label>Especificaciones</mat-label>
+                    <input matInput autocomplete="off" formControlName="especificaciones">
+                    <mat-icon matSuffix>list_alt</mat-icon>
+                    <mat-error *ngIf="formularioMedicamento.get('especificaciones')?.hasError('required')">
+                        Las especificaciones son requeridas.
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+        </mat-grid-list>
+    </form>
+</mat-dialog-content>
+
+<!-- Botones -->
+<mat-dialog-actions align="center">
+    <button mat-raised-button mat-dialog-close color="warn">Volver</button>
+    <button mat-raised-button color="primary"
+        [disabled]="formularioMedicamento.invalid"
+        (click)="guardarEditar_Medicamento()"
+    >{{botonAccion}}</button>
+</mat-dialog-actions>
+
