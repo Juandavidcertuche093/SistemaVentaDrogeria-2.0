@@ -1,1 +1,136 @@
-<p>sales-pages works!</p>
+
+<mat-card class="p-2 mt-5 mx-10 mb-10">
+
+  <mat-card-content>
+      <form [formGroup]="formularioMedicamentoVenta" (ngSubmit)="agregarMedicamentoParaVenta()">
+
+          <mat-grid-list cols="4" rowHeight="80px">
+
+              <!-- primera columna filtar producto -->
+              <mat-grid-tile [colspan]="2">
+                  <mat-form-field class="full-width" appearance="fill">
+                      <mat-label>Medicamentos</mat-label>
+                      <input matInput type="text" placeholder="Buscar..." [matAutocomplete]="auto" formControlName="medicamento">
+                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
+                          (optionSelected)="medicamentoParaVenta($event)"
+                          [displayWith]="mostrarMedicamento"
+                      >
+                          <mat-option *ngFor="let option of listaMedicamentosFiltro" [value]="option">
+                              {{option.nombre}}
+                          </mat-option>
+                      </mat-autocomplete>
+                  </mat-form-field>
+              </mat-grid-tile>
+
+              <!-- segunda columna cantidad -->
+              <mat-grid-tile>
+                  <mat-form-field class="full-width" appearance="fill" style="margin-left: 40px;">
+                      <mat-label>Cantiadad</mat-label>
+                      <input matInput type="number" formControlName="cantidad">
+                  </mat-form-field>
+              </mat-grid-tile>
+
+              <!-- tercera columna  boton agregar-->
+               <mat-grid-tile>
+                  <button mat-raised-button  color="primary" style="width: 80%;" [disabled]="formularioMedicamentoVenta.invalid">
+                      <mat-icon mat-list-icon>add</mat-icon>Agregar
+                  </button>
+               </mat-grid-tile>
+
+          </mat-grid-list>
+
+      </form>
+
+      <mat-grid-list cols="4" rowHeight="80px">
+
+          <mat-grid-tile [colspan]="2"></mat-grid-tile>
+          <!-- tipo de pago -->
+          <mat-grid-tile>
+              <mat-form-field class="full-width" appearance="fill" style="margin-left: 40px;">
+                  <mat-label>Tipo de Pago</mat-label>
+                  <mat-select [(value)]="tipoPagoDefecto">
+                      <mat-option value="Efectivo">Efectivo</mat-option>
+                      <mat-option value="tarjeta">tarjeta</mat-option>
+                  </mat-select>
+              </mat-form-field>
+          </mat-grid-tile>
+
+          <!-- total a pagar .toFixed()-->
+          <mat-grid-tile>
+              <button mat-raised-button color="accent" style="width: 80%;">
+                  Total: $/.{{totalApagar}}
+              </button>
+          </mat-grid-tile>
+
+      </mat-grid-list>
+
+      <!-- tabla de detalle venta -->
+      <div class="mat-elevation-z2">
+
+          <table mat-table [dataSource]="datosDetalleVenta">
+
+              <!-- Position Column -->
+              <ng-container matColumnDef="medicamento">
+                  <th mat-header-cell *matHeaderCellDef> Medicamento </th>
+                  <td mat-cell *matCellDef="let element"> {{element.descripcionMedicamento}} </td>
+              </ng-container>
+
+               <!-- Position Column -->
+               <ng-container matColumnDef="cantidad">
+                  <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+                  <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+              </ng-container>
+
+              <!-- Position Column -->
+              <ng-container matColumnDef="precio">
+                  <th mat-header-cell *matHeaderCellDef> Precio </th>
+                  <td mat-cell *matCellDef="let element"> {{element.precioTexto}} </td>
+              </ng-container>
+
+              <!-- Position Column -->
+              <ng-container matColumnDef="total">
+                  <th mat-header-cell *matHeaderCellDef> Total </th>
+                  <td mat-cell *matCellDef="let element"> {{element.totalTexto}} </td>
+              </ng-container>
+
+                <!-- Position Column -->
+              <ng-container matColumnDef="accion">
+                  <th mat-header-cell *matHeaderCellDef class="w-20"></th>
+                  <td mat-cell *matCellDef="let element" class="flex space-x-2">
+
+                      <button mat-icon-button class="delete-button" (click)="eliminarMendicamento(element)">
+                          <mat-icon>delete</mat-icon>
+                      </button>
+
+                  </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="columnasTabla"></tr>
+              <tr mat-row *matRowDef="let row; columns: columnasTabla;"></tr>
+
+          </table>
+
+      </div>
+
+      <mat-grid-list cols="4" rowHeight="80px">
+          <mat-grid-tile [colspan]="3"></mat-grid-tile>
+          <mat-grid-tile>
+
+              <button mat-raised-button color="primary" style="width: 80%;"
+                  [disabled]="listaMedicamentosParaVenta.length < 1 || bloquearBotonRegistro "
+                  (click)="registrarVenta()">
+                  <mat-icon>new_label</mat-icon>Registrar
+              </button>
+
+          </mat-grid-tile>
+      </mat-grid-list>
+
+  </mat-card-content>
+
+</mat-card>
+
+
+
+
+
+
