@@ -1,0 +1,92 @@
+<h2 mat-dialog-title>DetalleVenta</h2>
+
+<mat-dialog-content>
+
+        <mat-grid-list cols="4" rowHeight="70px">
+
+            <!-- primera fila nombre-->
+            <mat-grid-tile>
+                <mat-form-field appearance="fill" style="width: 95%;">
+                    <mat-label>Fecha Registro</mat-label>
+                    <input matInput [(ngModel)]="fechaRegistro">
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <!-- segunda fila correo -->
+            <mat-grid-tile>
+                <mat-form-field appearance="fill" style="width: 95%;">
+                    <mat-label>Numero Venta</mat-label>
+                    <input matInput [(ngModel)]="numeroDocumento">
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <!-- tercera fila Rol-->
+            <mat-grid-tile>
+                <mat-form-field appearance="fill" style="width: 95%;">
+                    <mat-label>Tipo Pago</mat-label>
+                    <input matInput [(ngModel)]="tipoPago">
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <!-- cuarta fila contraseña -->
+            <mat-grid-tile>
+                <mat-form-field appearance="fill" style="width: 95%;">
+                    <mat-label>Total</mat-label>
+                    <input matInput [(ngModel)]="total">
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <!-- cuarta fila contraseña
+            <mat-grid-tile>
+                <mat-form-field appearance="fill" style="width: 95%;">
+                    <mat-label>Vendedor</mat-label>
+                    <input matInput [(ngModel)]="UsuarioDescripcion" readonly>
+                </mat-form-field>
+            </mat-grid-tile>-->
+
+
+        </mat-grid-list>
+
+        <h2 class="text-sm">Lista de medicamentos</h2>
+
+        <table mat-table [dataSource]="detalleVenta" class="mat-elevation-z2">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="medicamento">
+                <th mat-header-cell *matHeaderCellDef>Medicamento</th>
+                <td mat-cell *matCellDef="let element">{{element.descripcionMedicamento}} </td>
+            </ng-container>
+
+             <!-- Position Column -->
+             <ng-container matColumnDef="cantidad">
+                <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+                <td mat-cell *matCellDef="let element">{{element.cantidad}} </td>
+            </ng-container>
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="precio">
+                <th mat-header-cell *matHeaderCellDef>Precio</th>
+                <td mat-cell *matCellDef="let element">{{element.precioTexto}} </td>
+            </ng-container>
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="total">
+                <th mat-header-cell *matHeaderCellDef>Total</th>
+                <td mat-cell *matCellDef="let element">{{element.totalTexto}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnasTabla"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnasTabla;"></tr>
+
+        </table>
+
+</mat-dialog-content>
+
+<!-- botones -->
+<mat-dialog-actions align="center">
+    <button mat-raised-button mat-dialog-close cdkFocusInitial color="warn">Volver</button>
+</mat-dialog-actions>
+
+
+
+
