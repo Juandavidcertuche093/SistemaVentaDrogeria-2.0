@@ -32,6 +32,11 @@ import { Venta } from '../../../../core/interface/venta.interface';
 import {VentaHistorialService} from '../../services/venta-historial.service'
 import {UtilidadService} from '../../../../services/utilidad.service';
 
+//PrimeNG
+import { TableModule } from 'primeng/table';
+import { BadgeModule } from 'primeng/badge';
+import { ButtonModule } from 'primeng/button';
+
 //Formato de fecha
 export const MY_DATA_FORMATS={
   parse:{
@@ -60,7 +65,10 @@ export const MY_DATA_FORMATS={
     MatPaginatorModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    TableModule,
+    BadgeModule,
+    ButtonModule
   ],
   templateUrl: './saleshistory-pages.component.html',
   styleUrl: './saleshistory-pages.component.scss'

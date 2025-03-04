@@ -26,6 +26,11 @@ import { UtilidadService } from '../../../../services/utilidad.service';
 //componete modoal
 import { ModalRegistroComponent } from '../../components/modal-registro/modal-registro.component';
 
+//PrimeNG
+import { TableModule } from 'primeng/table';
+import { BadgeModule } from 'primeng/badge';
+import { ButtonModule } from 'primeng/button';
+
 
 @Component({
   selector: 'app-users-pages',
@@ -41,12 +46,16 @@ import { ModalRegistroComponent } from '../../components/modal-registro/modal-re
     MatFormFieldModule,
     MatInputModule,
     MatPaginatorModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    TableModule,
+    BadgeModule,
+    ButtonModule
   ],
   templateUrl: './users-pages.component.html',
   styleUrl: './users-pages.component.scss'
 })
-export class UsersPagesComponent implements OnInit, AfterViewInit {
+export class UsersPagesComponent implements OnInit{
+
   columnasTabla: string[] = ['nombreCompleto', 'correo', 'rolDescription', 'estado', 'acciones'];
   dataInicio: Usuario[] = []
   datalistaUsuario = new MatTableDataSource(this.dataInicio)
@@ -74,14 +83,14 @@ export class UsersPagesComponent implements OnInit, AfterViewInit {
   }
 
   //CREAMOS LA PAGINACION CON ESTE EVENTO (ngAfterViewInit)
-  ngAfterViewInit(): void {
-    this.datalistaUsuario.paginator = this.paginacionTabla
-  }
+  // ngAfterViewInit(): void {
+  //   this.datalistaUsuario.paginator = this.paginacionTabla
+  // }
 
   //METODO PARA FILTRAR
-  aplicarFiltroTabla(event: Event){
-    const filterValue = (event.target as HTMLInputElement).value
-    this.datalistaUsuario.filter = filterValue.trim().toLocaleLowerCase()
+  aplicarFiltroTabla(event: Event, dt: any) {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    dt.filterGlobal(filterValue, 'contains');
   }
 
   //METODO PARA EL MODAL DE CREAR USUARIO

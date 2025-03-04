@@ -29,6 +29,11 @@ import { MedicamentoService } from '../../services/medicamento.service';
 import { UtilidadService } from '../../../../services/utilidad.service';
 import Swal from 'sweetalert2';
 
+//PrimeNG
+import { TableModule } from 'primeng/table';
+import { BadgeModule } from 'primeng/badge';
+import { ButtonModule } from 'primeng/button';
+
 @Component({
   selector: 'app-medicine-page',
   imports: [
@@ -43,7 +48,10 @@ import Swal from 'sweetalert2';
     MatFormFieldModule,
     MatInputModule,
     MatPaginatorModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    TableModule,
+    BadgeModule,
+    ButtonModule
   ],
   templateUrl: './medicine-page.component.html',
   styleUrl: './medicine-page.component.scss'
@@ -84,18 +92,15 @@ export class MedicinePageComponent implements OnInit, AfterViewInit {
   }
 
   //metodo para filtrar
-  aplicarFiltroTabla(event: Event){
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataListaMedicamentos.filter = filterValue.trim().toLocaleLowerCase();
+  aplicarFiltroTabla(event: Event, dt: any) {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    dt.filterGlobal(filterValue, 'contains');
   }
 
   //metodo para el valor del stock
   getStockClass(stock: number): string {
-    if (stock > 10) {
-      return 'stock-alto'; // Clase para stock alto
-    } else if (stock <= 10) {
-      return 'stock-bajo'; // Clase para stock bajo
-    }
+    if (stock > 10) return 'stock-alto';
+    if (stock > 0) return 'stock-bajo';
     return '';
   }
 

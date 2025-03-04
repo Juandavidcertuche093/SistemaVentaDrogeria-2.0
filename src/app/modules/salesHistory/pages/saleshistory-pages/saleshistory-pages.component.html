@@ -56,65 +56,43 @@
           <input matInput (keypress)="aplicarFiltroTabla($event)" #input>
       </mat-form-field>
 
-      <div class="mat-elevation-z2">
-
-          <table mat-table [dataSource]="dataListaVenta">
-
-              <!-- Position Column -->
-              <ng-container matColumnDef="fechaRegistro">
-                  <th mat-header-cell *matHeaderCellDef>Fecha Registro</th>
-                  <td mat-cell *matCellDef="let element"> {{element.fechaRegistro}} </td>
-              </ng-container>
-
-               <!-- Position Column -->
-               <ng-container matColumnDef="numeroDocumento">
-                  <th mat-header-cell *matHeaderCellDef>Numero de Venta</th>
-                  <td mat-cell *matCellDef="let element"> {{element.numDocumento}} </td>
-              </ng-container>
-
-              <!-- Position Column -->
-              <ng-container matColumnDef="tipoPago">
-                  <th mat-header-cell *matHeaderCellDef>Tipo Pago</th>
-                  <td mat-cell *matCellDef="let element"> {{element.tipoPago}} </td>
-              </ng-container>
-
-              <!-- Position Column -->
-              <ng-container matColumnDef="total">
-                  <th mat-header-cell *matHeaderCellDef>Total</th>
-                  <td mat-cell *matCellDef="let element"> {{element.totalTexto}} </td>
-              </ng-container>
-
-               <!-- Position Column -->
-               <ng-container matColumnDef="vendedor">
-                  <th mat-header-cell *matHeaderCellDef>Usuario</th>
-                  <td mat-cell *matCellDef="let element"> {{element.usuarioDescripcion}} </td>
-              </ng-container>
-
-                <!-- Position Column -->
-              <ng-container matColumnDef="accion">
-                  <th mat-header-cell *matHeaderCellDef class="w-20"></th>
-                  <td mat-cell *matCellDef="let element" class="acciones-cell">
-                      <button mat-icon-button class="visibility-button" (click)="verDetalleVenta(element)"
-                          matTooltip="Ver detalle"
-                      >
-                          <mat-icon>visibility</mat-icon>
-                      </button>
-                  </td>
-              </ng-container>
-
-              <tr mat-header-row *matHeaderRowDef="columnasTabla"></tr>
-              <tr mat-row *matRowDef="let row; columns: columnasTabla;"></tr>
-
-              <tr class="mat-row" *matNoDataRow>
-                  <td class="mat-cell" colspan="4">No hay datos que coincidan con el filtro "{{input.value}}"</td>
+          <!-- tabla -->
+      <p-table
+          [value]="dataListaVenta.data"
+          [paginator]="true"
+          [rows]="20"
+          [rowsPerPageOptions]="[30, 40, 50]"
+      >
+          <ng-template pTemplate="header">
+              <tr>
+                  <th>fecha Registro</th>
+                  <th>numero Venta</th>
+                  <th>Tipo Pago</th>
+                  <th>Total</th>
+                  <th>Usuario</th>
+                  <th></th>
               </tr>
-
-          </table>
-
-          <mat-paginator [pageSizeOptions]="[10,20,30]" showFirstLastButtons>
-          </mat-paginator>
-
-      </div>
+          </ng-template>
+          <ng-template pTemplate="body" let-venta>
+              <tr>
+                  <td>{{ venta.fechaRegistro }}</td>
+                  <td>{{ venta.numDocumento }}</td>
+                  <td>{{ venta.tipoPago }}</td>
+                  <td>{{ venta.totalTexto }}</td>
+                  <td>{{ venta.usuarioDescripcion }}</td>
+                  <td class="flex gap-2">
+                      <button pButton icon="pi pi-eye" class="p-button-rounded p-button-info p-mr-2" (click)="verDetalleVenta(venta)"></button>
+                  </td>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="6" class="text-center p-4">
+                No hay datos que coincidan con el filtro "{{ input.value }}"
+              </td>
+            </tr>
+          </ng-template>
+      </p-table>
 
   </mat-card-content>
 

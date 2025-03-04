@@ -34,6 +34,11 @@ import { Reporte } from '../../../../core/interface/reporte.interface';
 import {VentaReporteService} from '../../services/venta-reporte.service';
 import {UtilidadService} from '../../../../services/utilidad.service';
 
+//PrimeNG
+import { TableModule } from 'primeng/table';
+import { BadgeModule } from 'primeng/badge';
+import { ButtonModule } from 'primeng/button';
+
 
 
 export const MY_DATA_FORMATS={
@@ -65,7 +70,11 @@ export const MY_DATA_FORMATS={
     MatAutocompleteModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    TableModule,
+    BadgeModule,
+    ButtonModule
+
   ],
   templateUrl: './report-page.component.html',
   styleUrl: './report-page.component.scss'

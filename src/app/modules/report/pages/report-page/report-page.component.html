@@ -38,7 +38,8 @@
 
       <!-- boton para exportar formulario a Excel-->
       <div class="pb-4 flex items-center space-x-4">
-          <button mat-raised-button color="primary"
+
+          <!-- <button mat-raised-button color="primary"
               [disabled]="listaVentasReporte.length < 1"
               class="boton-exportar-excel"
               (click)="exportarExcel()">
@@ -49,83 +50,65 @@
               [disabled]="listaVentasReporte.length < 1"
               (click)="exportarPDF()">
               <mat-icon>picture_as_pdf</mat-icon>Exportar PDF
-          </button>
+          </button> -->
+
+          <p-button
+            [disabled]="listaVentasReporte.length < 1"
+            label="Exportar Excel"
+            icon="pi pi-file-excel"
+            severity="primary"
+            (click)="exportarExcel()"
+          />
+
+          <p-button
+            [disabled]="listaVentasReporte.length < 1"
+            label="Exportar PDF"
+            icon="pi pi-file-pdf"
+            severity="danger"
+            (click)="exportarPDF()"
+          />
+
       </div>
 
 
-          <div class="mat-elevation-z2" style="margin-top: 15px;">
+          <!-- talba -->
+        <p-table
+        [value]="dataVentaReporte.data"
+        [paginator]="true"
+        [rows]="20"
+        [rowsPerPageOptions]="[30, 40, 50]"
+        [stripedRows]="true"
+        [globalFilterFields]="['nombre', 'descripcionCategoria', 'precio', 'stock']"
+        #dt
+    >
+        <ng-template pTemplate="header">
+            <tr>
+                <th>fecha Registro</th>
+                <th>Numero de Venta</th>
+                <th>Tipo de Pago</th>
+                <th>Total Venta</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Total medicamento</th>
+                <th>Usuario</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-reporte>
+            <tr>
+                <td>{{ reporte.fechaRegistro }}</td>
+                <td>{{ reporte.numeroDocumento }}</td>
+                <td>{{ reporte.tipoPago }}</td>
+                <td>{{ reporte.totalVenta }}</td>
+                <td>{{ reporte.medicamento }}</td>
+                <td>{{ reporte.cantidad }}</td>
+                <td>{{ reporte.precio }}</td>
+                <td>{{ reporte.total }}</td>
+                <td>{{ reporte.usuario }}</td>
+            </tr>
+        </ng-template>
 
-              <table mat-table [dataSource]="dataVentaReporte">
-
-                  <!-- Position Column -->
-                  <ng-container matColumnDef="fechaRegistro">
-                      <th mat-header-cell *matHeaderCellDef>fecha Registro</th>
-                      <td mat-cell *matCellDef="let element"> {{element.fechaRegistro}} </td>
-                  </ng-container>
-
-                   <!-- Position Column -->
-                   <ng-container matColumnDef="correo">
-                      <th mat-header-cell *matHeaderCellDef>Correo</th>
-                      <td mat-cell *matCellDef="let element"> {{element.correo}} </td>
-                  </ng-container>
-
-                  <!-- Position Column -->
-                  <ng-container matColumnDef="numeroVenta">
-                      <th mat-header-cell *matHeaderCellDef>Numero de Venta</th>
-                      <td mat-cell *matCellDef="let element"> {{element.numeroDocumento}} </td>
-                  </ng-container>
-
-                  <!-- Position Column -->
-                  <ng-container matColumnDef="tipoPago">
-                      <th mat-header-cell *matHeaderCellDef>Tipo de Pago</th>
-                      <td mat-cell *matCellDef="let element"> {{element.tipoPago}} </td>
-                  </ng-container>
-
-                  <!-- Position Column -->
-                  <ng-container matColumnDef="total">
-                      <th mat-header-cell *matHeaderCellDef>Total Venta</th>
-                      <td mat-cell *matCellDef="let element"> {{element.totalVenta}} </td>
-                  </ng-container>
-
-                    <!-- Position Column -->
-                    <ng-container matColumnDef="producto">
-                      <th mat-header-cell *matHeaderCellDef>Producto</th>
-                      <td mat-cell *matCellDef="let element"> {{element.medicamento}} </td>
-                  </ng-container>
-
-                    <!-- Position Column -->
-                    <ng-container matColumnDef="cantidad">
-                      <th mat-header-cell *matHeaderCellDef>Cantidad</th>
-                      <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
-                  </ng-container>
-
-                   <!-- Position Column -->
-                   <ng-container matColumnDef="precio">
-                      <th mat-header-cell *matHeaderCellDef>Precio</th>
-                      <td mat-cell *matCellDef="let element"> {{element.precio}} </td>
-                  </ng-container>
-
-                    <!-- Position Column -->
-                    <ng-container matColumnDef="totalProducto">
-                      <th mat-header-cell *matHeaderCellDef>Total por medicamento</th>
-                      <td mat-cell *matCellDef="let element"> {{element.total}} </td>
-                  </ng-container>
-
-                   <!-- Position Column -->
-                   <ng-container matColumnDef="usuario">
-                      <th mat-header-cell *matHeaderCellDef>Usuario</th>
-                      <td mat-cell *matCellDef="let element"> {{element.usuario}} </td>
-                  </ng-container>
-
-                  <tr mat-header-row *matHeaderRowDef="columnasTabla"></tr>
-                  <tr mat-row *matRowDef="let row; columns: columnasTabla;"></tr>
-
-              </table>
-
-              <mat-paginator [pageSizeOptions]="[10,20,30]" showFirstLastButtons>
-              </mat-paginator>
-
-          </div>
+    </p-table>
 
   </mat-card-content>
 </mat-card>

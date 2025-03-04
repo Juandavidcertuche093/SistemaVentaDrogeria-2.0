@@ -29,6 +29,11 @@ import { MedicamentoVentaService } from '../../../sales/services/medicamento-ven
 import { UtilidadService } from '../../../../services/utilidad.service';
 import { AuthUsuarioService } from '../../../authentication/services/auth-usuario.service';
 
+//PrimeNG
+import { TableModule } from 'primeng/table';
+import { BadgeModule } from 'primeng/badge';
+import { ButtonModule } from 'primeng/button';
+
 @Component({
   selector: 'app-sales-pages',
   imports: [
@@ -45,7 +50,10 @@ import { AuthUsuarioService } from '../../../authentication/services/auth-usuari
     CdkTableModule,
     MatTableModule,
     ReactiveFormsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    TableModule,
+    BadgeModule,
+    ButtonModule
   ],
   templateUrl: './sales-pages.component.html',
   styleUrl: './sales-pages.component.scss'
