@@ -72,7 +72,7 @@ export class AuthUsuarioService {
           console.error("Error en la autenticación:", error);
 
           // Verifica si el error es porque las credenciales son incorrectas
-          if (error.status === 400 && error.error?.msg === "Credenciales incorrectas") {
+          if (error.status === 400 && (error.error?.msg === "Credenciales incorrectas" || error.error?.msg === "El usuario no existe")) {
             return of('invalid-credentials' as const);
           }
 
