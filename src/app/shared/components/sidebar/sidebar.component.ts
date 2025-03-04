@@ -40,7 +40,7 @@ import { NotificacionesService } from '../../services/notificaciones.service';
     trigger('sidebarAnimation', [
       state('expanded', style({ width: '220px' })),
       state('collapsed', style({ width: '65px' })),
-      transition('expanded <=> collapsed', animate('300ms ease-in-out')) // Ajusta la velocidad aquí
+      transition('expanded <=> collapsed', animate('350ms ease-in-out')) // Ajusta la velocidad aquí
     ])
   ],
   templateUrl: './sidebar.component.html',

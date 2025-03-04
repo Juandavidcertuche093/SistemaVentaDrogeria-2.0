@@ -4,7 +4,7 @@
 } */
 
 :host * {
-  transition: all 500ms ease-in-out;
+  transition: all 350ms ease-in-out;
 }
 
 .mat-icon {
@@ -23,9 +23,9 @@
   // transition: width 2500ms cubic-bezier(0.4, 0, 0.2, 1); /* Más lento (1.5 segundos) */
 }
 
-// mat-sidenav-content {
-//   transition: margin-left 2500ms cubic-bezier(0.4, 0, 0.2, 1); /* Más lento (1.5 segundos) */
-// }
+mat-sidenav-content {
+  transition: margin-left 350ms ease-in-out; /* Ajusta la duración si es necesario */
+}
 
 /* Resto de tu CSS */
 .header-text {
@@ -75,7 +75,7 @@ mat-toolbar {
 }
 
 .content {
-  padding: 24px;
+  padding: 0px;
   background-color: #e0e8fa; /* Color del contenedor */
 }
 
