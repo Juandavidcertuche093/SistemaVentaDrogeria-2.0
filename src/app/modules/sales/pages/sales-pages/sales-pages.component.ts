@@ -89,7 +89,7 @@ export class SalesPagesComponent implements OnInit {
   ){
     this.formularioMedicamentoVenta = this.fb.nonNullable.group({
       medicamento:["",[Validators.required]],
-      cantidad:["",[Validators.required]]
+      cantidad:["",[Validators.required, Validators.min(1)]]
     })
 
     //LISTA DE MEDICAMENTOS ACTIVOS Y CON STOCK MAYOR 0
@@ -129,6 +129,12 @@ export class SalesPagesComponent implements OnInit {
     const _cantidad: number = this.formularioMedicamentoVenta.value.cantidad;
     const _precio: number = parseFloat(this.medicamentoSeleccionado.precio);
     const _total: number = _cantidad * _precio;
+
+
+    if (_cantidad <= 0 || isNaN(_cantidad)) {
+      this.utilidadService.mostrarAlerta('La cantidad debe ser mayor a 0', 'Error');
+      return;
+    }
 
     // Validar si el stock es suficiente
     if (this.medicamentoSeleccionado.stock < _cantidad) {
